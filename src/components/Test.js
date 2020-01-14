@@ -1,4 +1,6 @@
 import React from 'react';
+// try using react-script-tag
+// https://www.npmjs.com/package/react-script-tag
 
 const Test = () => {
   return (
