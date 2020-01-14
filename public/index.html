@@ -18,5 +18,28 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <script src="./js/jquery-1.7.min.js"></script>
+    <script src="./js/Three49custom.js"></script>
+    <script type="text/javascript" src="./js/GLmol.js"></script>
+
+    <script type="text/javascript">
+      var glmol01 = new GLmol('glmol01', true);
+      glmol01.defineRepresentation = function() {
+        var all = this.getAllAtoms();
+        var hetatm = this.removeSolvents(this.getHetatms(all));
+        this.colorByAtom(all, {});
+        this.colorByChain(all);
+        var asu = new THREE.Object3D();
+
+        this.drawBondsAsLine(asu, hetatm, this.lineWidth);
+
+        this.modelGroup.add(asu);
+      };
+      $.get('./assets/buckyball.pdb', function(ret) {
+        $('#glmol01_src').val(ret);
+        glmol01.loadMolecule();
+      });
+    </script>
   </body>
 </html>
